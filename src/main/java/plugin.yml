@@ -1,7 +1,7 @@
 name: 42authcraft
 version: 1.0
 author: RPDJF
-main: ch.ruinformatique.fortytwoauthcraft.Main
+main: ch.ruinformatique.fortytwoauthcraft.FortytwoAuthCraft
 api-version: 1.21
 commands:
   login:

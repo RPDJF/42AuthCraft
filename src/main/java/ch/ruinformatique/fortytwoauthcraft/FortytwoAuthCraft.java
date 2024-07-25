@@ -7,7 +7,11 @@ import ch.ruinformatique.fortytwoauthcraft.commands.*;
 import ch.ruinformatique.fortytwoauthcraft.events.*;
 import ch.ruinformatique.fortytwoauthcraft.managers.PlayerVerificationManager;
 
-public class Main extends JavaPlugin {
+public class FortytwoAuthCraft extends JavaPlugin {
+
+	public static FortytwoAuthCraft getPlugin() {
+		return JavaPlugin.getPlugin(FortytwoAuthCraft.class);
+	}
 
 	@Override
 	public void onEnable() {
