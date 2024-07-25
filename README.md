@@ -2,6 +2,9 @@
 
 Welcome to **42AuthCraft**! This is a simple and lightweight authentication plugin for Minecraft Spigot servers (version 1.21.X). Designed specifically for the 42 Network students, it allows you to authenticate on a Minecraft server using your 42 intranet credentials via OAuth2.
 
+## Preview 🎥
+![Preview]("docs/preview.gif")
+
 ## Features ✨
 
 - **Simple & Lightweight**: No sensitive data is stored.
