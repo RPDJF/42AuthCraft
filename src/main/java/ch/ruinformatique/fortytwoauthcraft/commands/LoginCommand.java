@@ -5,7 +5,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import ch.ruinformatique.fortytwoauthcraft.managers.EventsManager;
 import ch.ruinformatique.fortytwoauthcraft.managers.PlayerVerificationManager;
 import ch.ruinformatique.fortytwoauthcraft.ConfigHandler;
 import ch.ruinformatique.fortytwoauthcraft.State;
