@@ -7,7 +7,10 @@ Welcome to **42AuthCraft**! This is a simple and lightweight authentication plug
 - **Simple & Lightweight**: No sensitive data is stored.
 - **OAuth2 Authentication**: Authenticate using your 42 intranet credentials.
 - **Session-Based**: Players need to re-authenticate each time they join the server.
-- **Maven Managed**: Dependencies are managed using Maven.
+- **Customizable**: Replace the default messages with your own.
+
+## Upcoming Features (maybe) 🚀
+- **Nickname Sync**: Automatically set the player's nickname to their 42 username if configured in the `config.yml`.
 
 ## How It Works 🛠️
 
@@ -18,11 +21,20 @@ Welcome to **42AuthCraft**! This is a simple and lightweight authentication plug
 
 ## Getting Started 🚀
 
-1. **Clone the Repository**: `git clone https://github.com/yourusername/42AuthCraft.git`
-2. **Build with Maven**: Navigate to the project directory and run `mvn clean install`.
-3. **Deploy**: Place the generated JAR file in your Spigot server's plugins directory.
-4. **Configure**: Set up your OAuth2 credentials in the plugin configuration file.
-5. **Run the Server**: Start your Spigot server and enjoy!
+1. **Get 42 API keys**: You will need to create an OAuth2 application on the 42 intranet to get your client ID and client secret [here](https://profile.intra.42.fr/oauth/applications/new).
+2. **Set up the Redirect URI**: Set the redirect URI to your server on the 42 intranet application settings. By default, the redirect URI is `http://localhost:8080/oauth2/callback`, I recommend using a reverse proxy and domain name to redirect to your server.
+2. **Download the Plugin**: Download the latest release from the github repository.
+3. **Install the Plugin**: Place the downloaded `.jar` file in the `plugins` folder of your Spigot server.
+4. **Start the Server**: Start your server and wait for the plugin to load.
+5. **Configure the Plugin**: Open the `config.yml` file in the `42AuthCraft` folder and set your client ID and client secret.
+6. **Reload the Server**: Reload the server to apply the changes.
+7. **Play**: Join the server and use the `/login` command to authenticate.
+
+## Development 🛠️ (Local development)
+1. **Clone the Repository**: Clone the repository to your local machine.
+2. **Set up the 42 API keys**: Follow the steps above to get your client ID and client secret.
+3. **Set up the Redirect URI**: Set the redirect URI to `http://localhost:8080/oauth2/callback` on the 42 intranet application settings.
+4. **Compile with Maven**: Run `mvn clean install` to compile the plugin.
 
 ## Contributing 🤝
 
