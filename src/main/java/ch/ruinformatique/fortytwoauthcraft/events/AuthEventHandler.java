@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
+import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -51,6 +52,11 @@ public class AuthEventHandler implements Listener {
 	}
 
 	@EventHandler
+	public void onPlayerItemDamage(PlayerItemDamageEvent event) {
+		event.setCancelled(!PlayerVerificationManager.isPlayerVerified(event.getPlayer().getUniqueId()));
+	}
+
+	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		event.setCancelled(!PlayerVerificationManager.isPlayerVerified(event.getPlayer().getUniqueId()));
 	}
@@ -76,6 +82,9 @@ public class AuthEventHandler implements Listener {
 			if (firework.hasMetadata("noDamage")) {
 				event.setCancelled(true);
 			}
+		} else if (event.getDamager() instanceof Player) {
+			event.setCancelled(
+					!PlayerVerificationManager.isPlayerVerified(((Player) event.getDamager()).getUniqueId()));
 		}
 	}
 }
