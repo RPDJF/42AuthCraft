@@ -104,6 +104,7 @@ public class SimpleOAuth2Server {
 					OutputStream os = exchange.getResponseBody();
 					os.write(response.getBytes());
 					os.close();
+					StateValidationManager.removeState(state);
 					Bukkit.getScheduler().runTask(plugin, () -> {
 						PlayerVerificationManager.verifyPlayer(stateValidation.getPlayer());
 					});
