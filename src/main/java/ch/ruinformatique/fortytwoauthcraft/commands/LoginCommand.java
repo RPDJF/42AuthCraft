@@ -23,7 +23,6 @@ public class LoginCommand implements CommandExecutor {
 		Player player = (Player) sender;
 		if (PlayerVerificationManager.isPlayerVerified(player.getUniqueId())) {
 			sender.sendMessage(ConfigHandler.config.getString("login_already_logged_in_message"));
-			EventsManager.spawnFirework(player.getLocation());
 			return true;
 		}
 
