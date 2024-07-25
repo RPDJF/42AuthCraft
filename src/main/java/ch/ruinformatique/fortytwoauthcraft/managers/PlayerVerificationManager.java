@@ -14,12 +14,10 @@ public class PlayerVerificationManager {
 
 	public static void addUnverifiedPlayer(UUID player) {
 		unverifiedPlayers.add(player);
-		Bukkit.getPlayer(player).setAllowFlight(true);
 	}
 
 	public static void removeUnverifiedPlayer(UUID player) {
 		unverifiedPlayers.remove(player);
-		Bukkit.getPlayer(player).setAllowFlight(false);
 	}
 
 	public static void verifyPlayer(UUID player) {
