@@ -2,6 +2,7 @@ package ch.ruinformatique.fortytwoauthcraft.events;
 
 import ch.ruinformatique.fortytwoauthcraft.managers.PlayerVerificationManager;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +23,14 @@ public class AuthEventHandler implements Listener {
 
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent event) {
-		event.setCancelled(!PlayerVerificationManager.isPlayerVerified(event.getPlayer().getUniqueId()));
+		if (!PlayerVerificationManager.isPlayerVerified(event.getPlayer().getUniqueId())) {
+			Player player = event.getPlayer();
+			Location from = event.getFrom();
+			Location to = event.getTo();
+			if (from.getX() != to.getX() || from.getZ() != to.getZ() || from.getY() != to.getY()) {
+				player.teleport(from);
+			}
+		}
 	}
 
 	@EventHandler
