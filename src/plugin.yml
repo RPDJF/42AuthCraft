@@ -1,0 +1,9 @@
+name: 42authcraft
+version: 1.0
+author: RPDJF
+main: ch.ruinformatique.fortytwoauthcraft.Main
+api-version: 1.21
+commands:
+  login:
+    description: Login to 42 network
+    usage: /<command>
