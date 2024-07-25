@@ -1,6 +1,8 @@
 package ch.ruinformatique.fortytwoauthcraft.events;
 
 import ch.ruinformatique.fortytwoauthcraft.managers.PlayerVerificationManager;
+
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,6 +15,7 @@ import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 // This class is an event handler for the plugin. It listens for various events and cancels them if the player is unverified.
 public class AuthEventHandler implements Listener {
@@ -63,6 +66,16 @@ public class AuthEventHandler implements Listener {
 	public void onEntityRegainHealth(EntityRegainHealthEvent event) {
 		if (event.getEntity() instanceof Player) {
 			event.setCancelled(!PlayerVerificationManager.isPlayerVerified(((Player) event.getEntity()).getUniqueId()));
+		}
+	}
+
+	@EventHandler
+	public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+		if (event.getDamager() instanceof Firework) {
+			Firework firework = (Firework) event.getDamager();
+			if (firework.hasMetadata("noDamage")) {
+				event.setCancelled(true);
+			}
 		}
 	}
 }
