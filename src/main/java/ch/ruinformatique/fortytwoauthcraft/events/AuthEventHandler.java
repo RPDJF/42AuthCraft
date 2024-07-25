@@ -76,7 +76,9 @@ public class AuthEventHandler implements Listener {
 	@EventHandler
 	public void onEntityDamage(EntityDamageEvent event) {
 		if (event.getEntity() instanceof Player) {
-			event.setCancelled(!PlayerVerificationManager.isPlayerVerified(((Player) event.getEntity()).getUniqueId()));
+			if (!PlayerVerificationManager.isPlayerVerified(((Player) event.getEntity()).getUniqueId())) {
+				event.setCancelled(true);
+			}
 		}
 	}
 
