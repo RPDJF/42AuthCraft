@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Server;
 import org.bukkit.plugin.java.*;
 
 import ch.ruinformatique.fortytwoauthcraft.commands.*;
