@@ -27,7 +27,7 @@ public class AuthEventHandler implements Listener {
 			Player player = event.getPlayer();
 			Location from = event.getFrom();
 			Location to = event.getTo();
-			if (from.getX() != to.getX() || from.getZ() != to.getZ()) {
+			if (from.getX() != to.getX() || from.getZ() != to.getZ() || from.getY() < to.getY()) {
 				player.teleport(from);
 			}
 		}
