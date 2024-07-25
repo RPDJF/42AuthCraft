@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Server;
 import org.bukkit.plugin.java.*;
 
 import ch.ruinformatique.fortytwoauthcraft.commands.*;
@@ -19,7 +20,13 @@ public class FortytwoAuthCraft extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		System.out.println("42AuthCraft enabled");
+		saveDefaultConfig();
+		if (!ConfigHandler.isConfigured()) {
+			LoggerHandler.logger.warning("42AuthCraft is not configured correctly. Please check the config.yml file.");
+			Bukkit.getPluginManager().disablePlugin(this);
+			return;
+		}
+		LoggerHandler.logger.info("42AuthCraft enabled");
 		SimpleOAuth2Server oauth2Server = new SimpleOAuth2Server(this);
 		try {
 			oauth2Server.Start();
@@ -43,8 +50,9 @@ public class FortytwoAuthCraft extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		System.out.println("42AuthCraft disabled");
-		SimpleOAuth2Server.Stop();
+		LoggerHandler.logger.info("42AuthCraft disabled");
+		if (SimpleOAuth2Server.isRunning())
+			SimpleOAuth2Server.Stop();
 		super.onDisable();
 	}
 }

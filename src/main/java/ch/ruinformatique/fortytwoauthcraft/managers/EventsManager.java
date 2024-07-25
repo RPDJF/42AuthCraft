@@ -15,7 +15,6 @@ public class EventsManager {
 	public static void spawnFirework(Location location) {
 		FireworkMeta fireworkMeta = (FireworkMeta) Bukkit.getItemFactory()
 				.getItemMeta(org.bukkit.Material.FIREWORK_ROCKET);
-		System.out.println(location.toString());
 		fireworkMeta.setPower(2);
 		fireworkMeta.addEffect(FireworkEffect.builder().withColor(Color.RED).flicker(true).build());
 

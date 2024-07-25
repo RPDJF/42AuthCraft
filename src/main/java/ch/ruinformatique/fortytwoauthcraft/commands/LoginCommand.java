@@ -1,6 +1,5 @@
 package ch.ruinformatique.fortytwoauthcraft.commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -8,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import ch.ruinformatique.fortytwoauthcraft.managers.EventsManager;
 import ch.ruinformatique.fortytwoauthcraft.managers.PlayerVerificationManager;
+import ch.ruinformatique.fortytwoauthcraft.ConfigHandler;
 import ch.ruinformatique.fortytwoauthcraft.State;
 import ch.ruinformatique.fortytwoauthcraft.managers.StateValidationManager;
 import ch.ruinformatique.fortytwoauthcraft.webauth.SimpleOAuth2Server;
@@ -22,7 +22,7 @@ public class LoginCommand implements CommandExecutor {
 		}
 		Player player = (Player) sender;
 		if (PlayerVerificationManager.isPlayerVerified(player.getUniqueId())) {
-			sender.sendMessage(ChatColor.GREEN + "You are already logged in");
+			sender.sendMessage(ConfigHandler.config.getString("login_already_logged_in_message"));
 			EventsManager.spawnFirework(player.getLocation());
 			return true;
 		}
@@ -35,7 +35,7 @@ public class LoginCommand implements CommandExecutor {
 				+ "&redirect_uri=" + SimpleOAuth2Server.getOauth2RedirectUri() + "&response_type=code&state="
 				+ StateValidationManager.getState(player.getUniqueId()).getState();
 
-		sender.sendMessage(ChatColor.GREEN + "Please login at " + ChatColor.AQUA + ChatColor.UNDERLINE + url);
+		sender.sendMessage(ConfigHandler.config.getString("login_url_message").replace("%login_url%", url));
 
 		return true;
 	}

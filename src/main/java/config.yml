@@ -1,0 +1,40 @@
+# Configuration for 42 OAuth2 Authentication
+# Obtain your UID and secret from https://intra.42.fr/oauth/applications/new
+
+# OAuth2 Client ID (UID)
+# Replace "your-uid" with the UID you received from the 42 API.
+oauth2_client_id: "your-uid"
+
+# OAuth2 Client Secret
+# Replace "your-secret" with the secret you received from the 42 API.
+oauth2_client_secret: "your-secret"
+
+# OAuth2 Redirect URI
+# This is the URI where the OAuth2 provider will redirect to after authentication.
+# It is recommended to keep it as "http://localhost:8080/oauth2/callback" and use a reverse proxy to redirect to your localhost.
+# Ensure that this URI is also set in your application settings on the 42 API dashboard.
+oauth2_redirect_uri: "http://localhost:8080/oauth2/callback"
+
+# Messages
+# Customize the messages displayed to users during the login process.
+
+# Message shown to users who need to log in
+login_prompt_message: "§cYou need a 42 login to play on this server."
+
+# Example login command message
+login_command_example_message: "§6Example: /login"
+
+# Message shown to users upon successful login
+login_success_message: "§aSuccessfully logged in."
+
+# Message shown to users upon already being logged in
+login_already_logged_in_message: "§aYou are already logged in."
+
+# Message shown to users when given the login url
+login_url_message: "§6Please log in at: §b§n%login_url%"
+
+# OAuth2 Messages
+# Customize the messages displayed to users during the OAuth2 authentication process.
+
+# Message shown to users when logged in successfully (may be replaced)
+oauth2_login_success_message: "Successfully logged in with 42.\nYou can now close this window."

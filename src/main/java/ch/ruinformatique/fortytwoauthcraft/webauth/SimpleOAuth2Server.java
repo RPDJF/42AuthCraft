@@ -15,15 +15,17 @@ import java.net.URL;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import ch.ruinformatique.fortytwoauthcraft.ConfigHandler;
+import ch.ruinformatique.fortytwoauthcraft.LoggerHandler;
 import ch.ruinformatique.fortytwoauthcraft.State;
 import ch.ruinformatique.fortytwoauthcraft.managers.StateValidationManager;
 import ch.ruinformatique.fortytwoauthcraft.managers.PlayerVerificationManager;
 
 public class SimpleOAuth2Server {
 	private final JavaPlugin plugin;
-	private static final String oauth2ClientId = "";
-	private static final String oauth2ClientSecret = "";
-	private static final String oauth2RedirectUri = "";
+	private static final String oauth2ClientId = ConfigHandler.config.getString("oauth2_client_id");
+	private static final String oauth2ClientSecret = ConfigHandler.config.getString("oauth2_client_secret");
+	private static final String oauth2RedirectUri = ConfigHandler.config.getString("oauth2_redirect_uri");
 
 	public SimpleOAuth2Server(JavaPlugin plugin) {
 		this.plugin = plugin;
@@ -45,8 +47,6 @@ public class SimpleOAuth2Server {
 
 	public void Start() throws IOException, URISyntaxException {
 		server = HttpServer.create(new InetSocketAddress(8080), 0);
-		// i want root to be the path after http://localhost:8080/ or any other domain
-		// with optional port
 		server.createContext((new URI(oauth2RedirectUri).getPath()), new HttpHandler() {
 			@Override
 			public void handle(HttpExchange exchange) throws IOException {
@@ -65,7 +65,6 @@ public class SimpleOAuth2Server {
 					}
 					State stateValidation = StateValidationManager.getState(state);
 					if (stateValidation == null) {
-						System.out.println("State " + state + " not found");
 						exchange.sendResponseHeaders(405, -1);
 						return;
 					}
@@ -97,11 +96,10 @@ public class SimpleOAuth2Server {
 					int responseCode = connection.getResponseCode();
 					if (responseCode != 200) {
 						exchange.sendResponseHeaders(405, -1);
-						System.out.println("Error: " + responseCode);
 						return;
 					}
 
-					String response = "You have successfully logged in!\nYou can close this window now.";
+					String response = ConfigHandler.config.getString("oauth2_login_success_message");
 					exchange.sendResponseHeaders(200, response.length());
 					OutputStream os = exchange.getResponseBody();
 					os.write(response.getBytes());
@@ -116,10 +114,14 @@ public class SimpleOAuth2Server {
 		});
 		server.setExecutor(null);
 		server.start();
-		System.out.println("Server started on port 8080");
+		LoggerHandler.logger.info("OAuth2 server started on port " + server.getAddress().getPort());
 	}
 
 	public static void Stop() {
 		server.stop(0);
+	}
+
+	public static boolean isRunning() {
+		return server != null;
 	}
 }
