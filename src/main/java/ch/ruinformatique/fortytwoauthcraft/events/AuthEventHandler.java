@@ -11,7 +11,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
@@ -29,6 +28,7 @@ public class AuthEventHandler implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		PlayerVerificationManager.addUnverifiedPlayer(event.getPlayer().getUniqueId());
+		PlayerVerificationManager.askPlayerVerification(event.getPlayer().getUniqueId());
 	}
 
 	@EventHandler
@@ -38,17 +38,18 @@ public class AuthEventHandler implements Listener {
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
-		event.setCancelled(!PlayerVerificationManager.isPlayerVerified(event.getPlayer().getUniqueId()));
+		if (!PlayerVerificationManager.isPlayerVerified(event.getPlayer().getUniqueId())) {
+			event.setCancelled(true);
+			PlayerVerificationManager.askPlayerVerification(event.getPlayer().getUniqueId());
+		}
 	}
 
 	@EventHandler
 	public void onPlayerDropItem(PlayerDropItemEvent event) {
-		event.setCancelled(!PlayerVerificationManager.isPlayerVerified(event.getPlayer().getUniqueId()));
-	}
-
-	@EventHandler
-	public void onPlayerToggleFlight(PlayerToggleFlightEvent event) {
-		event.setCancelled(!PlayerVerificationManager.isPlayerVerified(event.getPlayer().getUniqueId()));
+		if (!PlayerVerificationManager.isPlayerVerified(event.getPlayer().getUniqueId())) {
+			event.setCancelled(true);
+			PlayerVerificationManager.askPlayerVerification(event.getPlayer().getUniqueId());
+		}
 	}
 
 	@EventHandler
@@ -58,7 +59,10 @@ public class AuthEventHandler implements Listener {
 
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
-		event.setCancelled(!PlayerVerificationManager.isPlayerVerified(event.getPlayer().getUniqueId()));
+		if (!PlayerVerificationManager.isPlayerVerified(event.getPlayer().getUniqueId())) {
+			event.setCancelled(true);
+			PlayerVerificationManager.askPlayerVerification(event.getPlayer().getUniqueId());
+		}
 	}
 
 	@EventHandler
@@ -83,8 +87,10 @@ public class AuthEventHandler implements Listener {
 				event.setCancelled(true);
 			}
 		} else if (event.getDamager() instanceof Player) {
-			event.setCancelled(
-					!PlayerVerificationManager.isPlayerVerified(((Player) event.getDamager()).getUniqueId()));
+			if (!PlayerVerificationManager.isPlayerVerified(((Player) event.getDamager()).getUniqueId())) {
+				event.setCancelled(true);
+				PlayerVerificationManager.askPlayerVerification(event.getDamager().getUniqueId());
+			}
 		}
 	}
 }
