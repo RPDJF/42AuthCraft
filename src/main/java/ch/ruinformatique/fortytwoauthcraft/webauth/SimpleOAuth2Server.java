@@ -65,7 +65,7 @@ public class SimpleOAuth2Server {
 					}
 					State stateValidation = StateValidationManager.getState(state);
 					if (stateValidation == null) {
-						exchange.sendResponseHeaders(405, -1);
+						exchange.sendResponseHeaders(403, -1);
 						return;
 					}
 					URI uri;
@@ -95,7 +95,7 @@ public class SimpleOAuth2Server {
 
 					int responseCode = connection.getResponseCode();
 					if (responseCode != 200) {
-						exchange.sendResponseHeaders(405, -1);
+						exchange.sendResponseHeaders(responseCode, -1);
 						return;
 					}
 
@@ -109,7 +109,7 @@ public class SimpleOAuth2Server {
 						PlayerVerificationManager.verifyPlayer(stateValidation.getPlayer());
 					});
 				} else {
-					exchange.sendResponseHeaders(405, -1);
+					exchange.sendResponseHeaders(500, -1);
 				}
 			}
 		});
