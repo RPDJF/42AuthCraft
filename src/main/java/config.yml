@@ -11,7 +11,7 @@ oauth2_client_secret: "your-secret"
 
 # OAuth2 Redirect URI
 # This is the URI where the OAuth2 provider will redirect to after authentication.
-# It is recommended to keep it as "http://localhost:8080/oauth2/callback" and use a reverse proxy to redirect to your localhost.
+# You can change the port as you please. I would recommend using a reverse proxy to get HTTPS.
 # Ensure that this URI is also set in your application settings on the 42 API dashboard.
 oauth2_redirect_uri: "http://localhost:8080/oauth2/callback"
 
