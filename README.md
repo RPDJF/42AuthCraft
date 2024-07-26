@@ -6,6 +6,11 @@ This is a simple and lightweight authentication plugin for Minecraft Spigot serv
 ## Preview 🎥
 ![Preview](https://github.com/RPDJF/42AuthCraft/blob/main/docs/preview.gif?raw=true)
 
+## Proof of concept server 🚀
+A minecraft server restricted to 42 students that you can join
+
+**ip**: `play.ruinfo.ch`
+
 ## Features ✨
 
 - **Simple & Lightweight**: No sensitive data is stored.
