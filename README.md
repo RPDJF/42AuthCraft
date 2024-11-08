@@ -9,7 +9,7 @@ This is a simple and lightweight authentication plugin for Minecraft Spigot serv
 ## Proof of concept server 🚀
 A minecraft server restricted to 42 students that you can join
 
-**ip**: `play.ruinfo.ch`
+**ip**: `play.ruinformatique.ch`
 
 ## Features ✨
 
